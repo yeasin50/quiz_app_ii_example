@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app_ii_example/data/result_manager.dart';
 import 'package:quiz_app_ii_example/model/category.dart';
 import 'package:quiz_app_ii_example/model/option.dart';
 import 'package:quiz_app_ii_example/model/question.dart';
@@ -24,6 +25,8 @@ class _CategoryPageState extends State<CategoryPage> {
 
     controller = PageController();
     question = widget.category.questions.first;
+    userResult =
+        List.generate(widget.category.questions.length, (index) => false);
   }
 
   @override
@@ -71,9 +74,12 @@ class _CategoryPageState extends State<CategoryPage> {
       return;
     } else {
       setState(() {
+        userResult[controller!.page!.ceil()] = option.isCorrect;
         question!.isLocked = true;
         question!.selectedOption = option;
       });
+      print(option.isCorrect);
+      print(userResult.toString());
     }
   }
 
