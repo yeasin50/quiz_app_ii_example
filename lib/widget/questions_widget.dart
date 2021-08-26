@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app_ii_example/model/category.dart';
 import 'package:quiz_app_ii_example/model/option.dart';
 import 'package:quiz_app_ii_example/model/question.dart';
+import 'package:quiz_app_ii_example/page/result.page.dart';
 import 'package:quiz_app_ii_example/widget/options_widget.dart';
+
+import 'show_result.widget.dart';
 
 class QuestionsWidget extends StatelessWidget {
   final Category category;
@@ -24,14 +27,15 @@ class QuestionsWidget extends StatelessWidget {
         controller: controller,
         itemCount: category.questions.length,
         itemBuilder: (context, index) {
-          final question = category.questions[index];
-
-          return buildQuestion(question: question);
+          return buildQuestion(
+              question: category.questions[index],
+              isLastQuestion: index == category.questions.length - 1);
         },
       );
 
   Widget buildQuestion({
     required Question question,
+    required bool isLastQuestion,
   }) =>
       Container(
         padding: const EdgeInsets.all(16),
@@ -55,6 +59,17 @@ class QuestionsWidget extends StatelessWidget {
                 onClickedOption: onClickedOption,
               ),
             ),
+            if (isLastQuestion)
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    MaterialPageRoute(
+                      builder: (context) => ResultPage(),
+                    );
+                  },
+                  child: Text("Check Result"),
+                ),
+              ),
           ],
         ),
       );
