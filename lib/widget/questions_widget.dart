@@ -28,6 +28,7 @@ class QuestionsWidget extends StatelessWidget {
         itemCount: category.questions.length,
         itemBuilder: (context, index) {
           return buildQuestion(
+              context: context,
               question: category.questions[index],
               isLastQuestion: index == category.questions.length - 1);
         },
@@ -36,6 +37,7 @@ class QuestionsWidget extends StatelessWidget {
   Widget buildQuestion({
     required Question question,
     required bool isLastQuestion,
+    required BuildContext context,
   }) =>
       Container(
         padding: const EdgeInsets.all(16),
@@ -63,9 +65,12 @@ class QuestionsWidget extends StatelessWidget {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    MaterialPageRoute(
-                      builder: (context) => ResultPage(),
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ResultPage(),
+                      ),
                     );
+                    print("nav to result");
                   },
                   child: Text("Check Result"),
                 ),
