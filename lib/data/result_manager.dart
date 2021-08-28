@@ -1,4 +1,3 @@
-
 List<bool> userResult = [];
 
-List<bool> visited = [];
+List<bool> selected = [];

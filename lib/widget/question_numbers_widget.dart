@@ -39,7 +39,7 @@ class QuestionNumbersWidget extends StatelessWidget {
     required int index,
     required bool isSelected,
   }) {
-    final color = !visited[index]
+    final color = !selected[index]
         ? Colors.grey
         : isSelected
             ? Colors.orange.shade300

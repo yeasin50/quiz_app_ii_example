@@ -27,8 +27,8 @@ class _CategoryPageState extends State<CategoryPage> {
     question = widget.category.questions.first;
     userResult =
         List.generate(widget.category.questions.length, (index) => false);
-    visited = List.generate(widget.category.questions.length, (index) => false);
-    visited[0] = true;
+    selected =
+        List.generate(widget.category.questions.length, (index) => false);
   }
 
   @override
@@ -38,7 +38,6 @@ class _CategoryPageState extends State<CategoryPage> {
           category: widget.category,
           controller: controller,
           onChangedPage: (index) {
-            visited[index] = true;
             nextQuestion(index: index);
           },
           onClickedOption: selectOption,
@@ -75,6 +74,9 @@ class _CategoryPageState extends State<CategoryPage> {
       );
 
   void selectOption(Option option) {
+    setState(() {
+      selected[controller!.page!.ceil()] = true;
+    });
     if (question!.isLocked) {
       return;
     } else {
