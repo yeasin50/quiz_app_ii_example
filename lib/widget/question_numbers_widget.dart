@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app_ii_example/data/result_manager.dart';
 import 'package:quiz_app_ii_example/model/question.dart';
 
 class QuestionNumbersWidget extends StatelessWidget {
@@ -38,7 +39,11 @@ class QuestionNumbersWidget extends StatelessWidget {
     required int index,
     required bool isSelected,
   }) {
-    final color = isSelected ? Colors.orange.shade300 : Colors.white;
+    final color = !visited[index]
+        ? Colors.grey
+        : isSelected
+            ? Colors.orange.shade300
+            : Colors.white;
 
     return GestureDetector(
       onTap: () => onClickedNumber(index),

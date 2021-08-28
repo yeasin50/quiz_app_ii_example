@@ -27,6 +27,8 @@ class _CategoryPageState extends State<CategoryPage> {
     question = widget.category.questions.first;
     userResult =
         List.generate(widget.category.questions.length, (index) => false);
+    visited = List.generate(widget.category.questions.length, (index) => false);
+    visited[0] = true;
   }
 
   @override
@@ -35,7 +37,10 @@ class _CategoryPageState extends State<CategoryPage> {
         body: QuestionsWidget(
           category: widget.category,
           controller: controller,
-          onChangedPage: (index) => nextQuestion(index: index),
+          onChangedPage: (index) {
+            visited[index] = true;
+            nextQuestion(index: index);
+          },
           onClickedOption: selectOption,
         ),
       );
